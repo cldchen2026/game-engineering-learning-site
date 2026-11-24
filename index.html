@@ -39,57 +39,45 @@ progress{display:block;width:100%;accent-color:var(--accent)}
 </style>
 <header><strong>游戏工程研习室</strong><nav aria-label="学习导航"><a href="#path">能力地图</a><a href="#review">每周复盘</a><a href="#backup">进度备份</a></nav></header>
 <main>
-<section class="hero"><div><h1>把工程问题<br>变成练习</h1><p>每次用 25 分钟读一个问题、做一个小实验，再留下能复查的证据。第一次建议从遥控器输入开始。</p><a href="#01-gameplay">开始第一节</a></div><div class="panel"><h2>课程进度</h2><p id="count">加载中</p><progress id="progress" aria-label="已通过课程验收"></progress></div></section>
+<section class="hero"><div><h1>练工程判断</h1><p>每次选一个案例，先写下你的判断和理由，再展开参考分析。六课都可以用纸笔完成。</p><a href="#01-gameplay">开始第一节</a></div><div class="panel"><h2>课程进度</h2><p id="count">加载中</p><progress id="progress" aria-label="已通过课程验收"></progress></div></section>
 <noscript><p>课程可以继续阅读。保存进度与复盘需要启用 JavaScript。</p></noscript>
 <section id="path"><h2>能力地图</h2><p>建议先练游戏开发和排查，再练架构与 Agent，最后用性能测量和实机实验做选型。</p><div class="cards">
-<article data-lesson="01-gameplay" id="01-gameplay"><h3>游戏开发</h3><p>从输入到状态更新，做一个遥控器可玩的最小关卡。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>按两次方向键和长按一次方向键，状态更新应该有什么区别？先画出输入、规则、画面的三段流程。</p>
-<h3>动手练习</h3>
-<p>用 HTML 或你熟悉的引擎做 3×3 网格。方向键移动焦点，确认键拿起物品，再按确认放下。先用坐标数据表达规则，再画出来。明确边界处保持原位，并为长按设定是否重复。</p>
+<article data-lesson="01-gameplay" id="01-gameplay"><h3>游戏开发</h3><p>遥控器一按，焦点该去哪？先写验收规则。</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>电视界面上排只有 A、B，下排有 C、D、E，C 对齐 A，D 对齐 B。用户从 E 按上，有人希望停住，有人希望跳到 B。返回键也要兼顾当前弹窗。</p>
+<h3>先做判断</h3>
+<p>在「停住」和「跳到 B」之间选一个，说明它适合什么页面。再写出三条可交付给开发或 AI 的操作序列，包括缺位、长按和弹窗返回。每条都要能直接判断通过或失败。</p>
 <h3>验收</h3>
-<p>记录四条操作序列和预期位置，包括越界、连续转向、长按和拿起后放下。改变视觉样式后，重复这四条序列并比较日志。</p>
-<h3>上游源码</h3>
-<p>阅读 <a href="https://github.com/godotengine/godot">Godot</a> 中的 scene/main/node.cpp，找到节点的输入处理入口。写出节点生命周期与游戏规则各自负责什么。</p></details><label>学习状态 <select aria-label="游戏开发学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
-<article data-lesson="02-debugging" id="02-debugging"><h3>Bug 排查</h3><p>用复现与证据定位一次按键退两级。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>同一个返回键让两个页面关闭，哪些证据能区分重复输入和两个监听器同时处理？</p>
-<h3>动手练习</h3>
-<p>做一个带弹窗的独立测试页，为物理按键事件、监听器、路由状态分别留下日志。让弹窗和页面都能收到返回键，复现问题。提出两个假设，每次只改变一个变量，验证事件重复次数与状态变化。</p>
+<p>不参考答案，向别人复述你的规则。如果对方能据此独立预测三个结果，并能指出规则何时需要调整，就通过本课。</p><details><summary>查看参考分析</summary><p>如果上下两排是同一组内容，跳到最近的 B 能减少遥控器操作。如果上下两排各自表达不同区域，停住也合理。明确长按越过边界时停住，明确弹窗内按一下返回只关弹窗，焦点回到打开弹窗的按钮。用这两条检查规则是否漏掉状态边界。</p></details></details><label>学习状态 <select aria-label="游戏开发学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<article data-lesson="02-debugging" id="02-debugging"><h3>Bug 排查</h3><p>一次返回退两级，怎样区分两种根因？</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>日志先记录一次遥控器返回键按下，接着弹窗关闭，20 毫秒后页面退出。另一份日志来自长按，记录到多个重复按键。团队有人建议先加 300 毫秒防抖。</p>
+<h3>先做判断</h3>
+<p>现有证据支持哪些假设？你会让 AI 补哪些日志，怎样区分一个事件被两层消费和两个事件分别触发？</p>
 <h3>验收</h3>
-<p>提交复现步骤、一段修复前后日志、根因和回归表。覆盖弹窗打开、弹窗关闭、长按、快速连按。解释日志里的哪一条证据推翻了另一个假设。</p>
-<h3>上游源码</h3>
-<p>在 <a href="https://github.com/microsoft/playwright">Playwright</a> 查找 Trace Viewer 的实现和样例，借用其中的时间序列思路整理自己的事件记录。</p></details><label>学习状态 <select aria-label="Bug 排查学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
-<article data-lesson="03-architecture" id="03-architecture"><h3>软件架构</h3><p>用边界和契约复用电视输入逻辑。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>如果遥控器和键盘输入进入同一个游戏，哪一层应该理解物理按键？哪一层负责改变焦点？</p>
-<h3>动手练习</h3>
-<p>基于第一节的小关卡画模块图，将设备输入转为移动、确认、返回三种动作。做键盘与模拟遥控器两个输入来源。写一份简短的架构决策记录，说明上下文、选择和代价。</p>
+<p>写出两个假设、各自应看到的日志，以及修复后的三个检查场景。说明哪条结果会让你改判。</p><details><summary>查看参考分析</summary><p>给每个输入事件记录编号和重复标记，再记录处理层、消费结果和前后页面状态。相同编号被弹窗和页面处理，优先检查消费边界。出现不同编号时再区分物理连按和系统重复。单按弹窗、长按弹窗、弹窗关闭后再次单按分别验证。防抖可能掩盖前一种根因，也可能吞掉正常连按。</p></details></details><label>学习状态 <select aria-label="Bug 排查学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<article data-lesson="03-architecture" id="03-architecture"><h3>软件架构</h3><p>两款游戏都要支持遥控器，哪些东西值得复用？</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>游戏甲是规则网格，游戏乙是横向滚动列表。两款都要求弹窗优先处理返回键。一个方案是复制全部代码，另一个方案是做一套通用焦点框架。</p>
+<h3>先做判断</h3>
+<p>划出第一版的复用边界。判断设备按键映射、返回优先级、网格导航、列表滚动是否应该共享。写下你愿意为共享方案承担的一个代价。</p>
 <h3>验收</h3>
-<p>用同一组动作验证两个输入来源的结果一致。把焦点规则换成环绕模式，指出实际改动的文件，并解释哪些变化会迫使你重新划分边界。</p>
-<h3>上游源码</h3>
-<p>从 <a href="https://github.com/joelparkerhenderson/architecture-decision-record">Architecture Decision Record</a> 挑一个模板，把顾虑和后果压缩到一页。</p></details><label>学习状态 <select aria-label="软件架构学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
-<article data-lesson="04-agent" id="04-agent"><h3>AI Agent 工程</h3><p>为一个只读诊断任务设计可验收的 Agent 流程。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>当模型汇总一份错误日志时，如何让别人区分观察到的证据与模型提出的推测？</p>
-<h3>动手练习</h3>
-<p>准备三份自己编造的游戏日志，分别对应焦点丢失、帧时间波动和证据不足。定义输入和输出契约。输出包含现象、证据行、假设和下一步验证。用任意模型或人工模拟执行，限制任务只读。</p>
+<p>写出一份五行以内的决策记录。假设乙方换了列表组件，说清受影响的范围，以及什么新证据会让你调整设计。</p><details><summary>查看参考分析</summary><p>可先共享物理按键到动作的映射，以及经过两款游戏验证的返回消费规则。网格与列表的导航保留在各自页面，避免把布局差异塞进共享接口。等第三个页面出现并证实有稳定重复模式，再讨论提取焦点策略。</p></details></details><label>学习状态 <select aria-label="软件架构学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<article data-lesson="04-agent" id="04-agent"><h3>AI Agent 工程</h3><p>Agent 给出了根因，什么证据足以让你采信？</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>输入只有三行模拟日志：第 41 行记录焦点离开菜单，第 42 行记录面板关闭，第 43 行记录焦点为空。Agent 说「可确定是监听器泄漏，已修好」，却没给改动和测试结果。</p>
+<h3>先做判断</h3>
+<p>把报告里的内容分成可观察事实、待验证假设和未证实的交付。给 Agent 写一句下一步任务，注明允许做的事和应提交的证据。</p>
 <h3>验收</h3>
-<p>使用同一张表跑三份日志。核实证据行是否存在、假设是否明确标注、证据不足时是否停止下结论。改变模型或手动执行后复用验收表。</p>
-<h3>上游源码</h3>
-<p>读 <a href="https://github.com/anthropics/anthropic-cookbook">Anthropic Cookbook</a> 里一个工具使用示例，提取输入结构和错误返回方式，用你自己的测试数据复写契约。</p></details><label>学习状态 <select aria-label="AI Agent 工程学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
-<article data-lesson="05-performance" id="05-performance"><h3>游戏性能与图形学</h3><p>从像素、帧时间与设备差异找到瓶颈。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>60 FPS 对应约 16.7 毫秒一帧。平均帧时间相同的两组数据，哪一组会更卡？举出一个反例。</p>
-<h3>动手练习</h3>
-<p>制作透明精灵重复叠加的场景。锁定物体数量和测试路径，在同一设备分别测低分辨率与高分辨率。预热后每档采样三次，记录帧时间中位数、P95 和长帧次数。再保持分辨率不变，单独减少叠加层。</p>
+<p>给出一条能拒绝这份报告的规则，再写一条证据不足时的合格输出。更换模型时仍能用同一标准评估。</p><details><summary>查看参考分析</summary><p>三行日志能支持“面板关闭后焦点为空”。监听器泄漏要靠订阅与解绑、重复回调或生命周期日志验证。可以要求 Agent 只读检查并引用文件和日志行，列出至少一个可区分的替代假设。没有改动记录和实际测试，就无法确认修复。</p></details></details><label>学习状态 <select aria-label="AI Agent 工程学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<article data-lesson="05-performance" id="05-performance"><h3>游戏性能与图形学</h3><p>平均帧时间接近，低配盒子为什么还是卡？</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>同一台盒子、同一路径下，方案甲的帧时间中位数是 16 毫秒，P95 是 19 毫秒。方案乙的中位数是 15 毫秒，P95 是 44 毫秒。卡顿常出现在半透明弹窗出现时。</p>
+<h3>先做判断</h3>
+<p>哪组更符合卡顿反馈？你会优先做哪两个一次只改变一个变量的实验？每个实验写清什么结果会加强你的猜测。</p>
 <h3>验收</h3>
-<p>给出对比表和一个待验证的瓶颈假设。把 CPU 主线程、GPU 像素开销、刷新率限制分别列为可能影响因素。重复跑一次，解释数据是否支持原假设。</p>
-<h3>上游源码</h3>
-<p>在 <a href="https://github.com/google/filament">Filament</a> 的 samples 中选一个材质相关示例，对照文档找出透明混合的设置位置。</p></details><label>学习状态 <select aria-label="游戏性能与图形学学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
-<article data-lesson="06-selection" id="06-selection"><h3>技术选型</h3><p>用小原型评估方案在实际设备和团队上的表现。</p><details><summary>阅读课程与练习</summary><h3>读前回忆</h3>
-<p>回想一次选型返工。哪个假设如果提前验证，可以少做一周工作？</p>
-<h3>动手练习</h3>
-<p>以同一款遥控器小游戏为题，挑两个引擎或框架。先定三条硬门槛，例如目标盒子可运行、断网可玩、返回键行为一致。给性能、构建改动和接手成本设权重。为两套方案各做一个限时原型，同一测试脚本、同一设备。</p>
+<p>区分已经观察到的现象与还需验证的瓶颈。给出两组可重复实验，写明设备、采样路径和对比指标。</p><details><summary>查看参考分析</summary><p>乙的 P95 更高，表示慢帧尾部更重，和偶发卡顿吻合。先保持动画和对象数量固定，只改渲染分辨率。第二次保持分辨率固定，只改半透明叠加层。若慢帧随两者明显变化，像素开销值得继续验证。若相近，转查 CPU 主线程、资源加载和垃圾回收。用相同路径重复采样。</p></details></details><label>学习状态 <select aria-label="游戏性能与图形学学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<article data-lesson="06-selection" id="06-selection"><h3>技术选型</h3><p>两个引擎各有优势，怎么避免选了才发现跑不了？</p><details><summary>打开案例</summary><h3>案例</h3>
+<p>方案甲团队熟悉，但在两台目标盒子中的一台上尚未实测。方案乙已经在两台盒子跑通样例，团队仍需摸索构建流程。这个项目必须离线运行，且两周后要交首包。</p>
+<h3>先做判断</h3>
+<p>写三条上线硬门槛。你只有半天做验证，先拿哪个证据？说明在什么结果下会选甲、选乙或暂缓。</p>
 <h3>验收</h3>
-<p>交付一页对比，包含版本、测试条件、原始证据、未验证项和复查日期。写明什么新证据会改变你的决定。</p>
-<h3>上游源码</h3>
-<p>比较 <a href="https://github.com/godotengine/godot">Godot</a> 和 <a href="https://github.com/cocos/cocos-engine">Cocos Engine</a> 的 Releases 与 Issues。为各自找一个与目标设备或构建链有关的已知问题，记录适用版本和复现条件。</p></details><label>学习状态 <select aria-label="技术选型学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>交付一页决策记录，包含硬门槛、待验证项、半天试验计划、临时选择和改判条件。用这份记录让同事能复现你的判断。</p><details><summary>查看参考分析</summary><p>优先在尚未验证的目标盒子跑甲的最小离线包，检查安装、冷启动和遥控器。并行评估乙的可重复制包和接手成本。甲通过硬门槛后可凭团队熟悉度占优。若甲在目标盒子失败且没有两周内可行的修复路径，再确认乙是否能完成离线和重复制包。样例跑通只覆盖部分风险。</p></details></details><label>学习状态 <select aria-label="技术选型学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 </div></section>
 <section id="review" class="panel"><h2>每周复盘</h2><p>选一个本周的关键实验，给该主题评分，记录一条证据和一个下周动作。同一日期可再次保存以修正记录。</p>
 <form id="review-form"><div class="review-fields">
