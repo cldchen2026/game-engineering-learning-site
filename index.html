@@ -41,43 +41,43 @@ progress{display:block;width:100%;accent-color:var(--accent)}
 <main>
 <section class="hero"><div><h1>练工程判断</h1><p>每次选一个案例，先写下你的判断和理由，再展开参考分析。六课都可以用纸笔完成。</p><a href="#01-gameplay">开始第一节</a></div><div class="panel"><h2>课程进度</h2><p id="count">加载中</p><progress id="progress" aria-label="已通过课程验收"></progress></div></section>
 <noscript><p>课程可以继续阅读。保存进度与复盘需要启用 JavaScript。</p></noscript>
-<section id="path"><h2>能力地图</h2><p>建议先练游戏开发和排查，再练架构与 Agent，最后用性能测量和实机实验做选型。</p><div class="cards">
+<section id="path"><h2>能力地图</h2><p>答案自动保存在当前浏览器。写完后点「复制批阅请求」，粘贴到你选用的 AI 对话并发送。你可以一次发送多题。</p><div class="cards">
 <article data-lesson="01-gameplay" id="01-gameplay"><h3>游戏开发</h3><p>遥控器一按，焦点该去哪？先写验收规则。</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>电视界面上排只有 A、B，下排有 C、D、E，C 对齐 A，D 对齐 B。用户从 E 按上，有人希望停住，有人希望跳到 B。返回键也要兼顾当前弹窗。</p>
 <h3>先做判断</h3>
 <p>在「停住」和「跳到 B」之间选一个，说明它适合什么页面。再写出三条可交付给开发或 AI 的操作序列，包括缺位、长按和弹窗返回。每条都要能直接判断通过或失败。</p>
 <h3>验收</h3>
-<p>不参考答案，向别人复述你的规则。如果对方能据此独立预测三个结果，并能指出规则何时需要调整，就通过本课。</p><details><summary>查看参考分析</summary><p>如果上下两排是同一组内容，跳到最近的 B 能减少遥控器操作。如果上下两排各自表达不同区域，停住也合理。明确长按越过边界时停住，明确弹窗内按一下返回只关弹窗，焦点回到打开弹窗的按钮。用这两条检查规则是否漏掉状态边界。</p></details></details><label>学习状态 <select aria-label="游戏开发学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>不参考答案，向别人复述你的规则。如果对方能据此独立预测三个结果，并能指出规则何时需要调整，就通过本课。</p><details><summary>查看参考分析</summary><p>如果上下两排是同一组内容，跳到最近的 B 能减少遥控器操作。如果上下两排各自表达不同区域，停住也合理。明确长按越过边界时停住，明确弹窗内按一下返回只关弹窗，焦点回到打开弹窗的按钮。用这两条检查规则是否漏掉状态边界。</p></details></details><label>我的答案<textarea data-answer aria-label="游戏开发答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="游戏开发学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 <article data-lesson="02-debugging" id="02-debugging"><h3>Bug 排查</h3><p>一次返回退两级，怎样区分两种根因？</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>日志先记录一次遥控器返回键按下，接着弹窗关闭，20 毫秒后页面退出。另一份日志来自长按，记录到多个重复按键。团队有人建议先加 300 毫秒防抖。</p>
 <h3>先做判断</h3>
 <p>现有证据支持哪些假设？你会让 AI 补哪些日志，怎样区分一个事件被两层消费和两个事件分别触发？</p>
 <h3>验收</h3>
-<p>写出两个假设、各自应看到的日志，以及修复后的三个检查场景。说明哪条结果会让你改判。</p><details><summary>查看参考分析</summary><p>给每个输入事件记录编号和重复标记，再记录处理层、消费结果和前后页面状态。相同编号被弹窗和页面处理，优先检查消费边界。出现不同编号时再区分物理连按和系统重复。单按弹窗、长按弹窗、弹窗关闭后再次单按分别验证。防抖可能掩盖前一种根因，也可能吞掉正常连按。</p></details></details><label>学习状态 <select aria-label="Bug 排查学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>写出两个假设、各自应看到的日志，以及修复后的三个检查场景。说明哪条结果会让你改判。</p><details><summary>查看参考分析</summary><p>给每个输入事件记录编号和重复标记，再记录处理层、消费结果和前后页面状态。相同编号被弹窗和页面处理，优先检查消费边界。出现不同编号时再区分物理连按和系统重复。单按弹窗、长按弹窗、弹窗关闭后再次单按分别验证。防抖可能掩盖前一种根因，也可能吞掉正常连按。</p></details></details><label>我的答案<textarea data-answer aria-label="Bug 排查答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="Bug 排查学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 <article data-lesson="03-architecture" id="03-architecture"><h3>软件架构</h3><p>两款游戏都要支持遥控器，哪些东西值得复用？</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>游戏甲是规则网格，游戏乙是横向滚动列表。两款都要求弹窗优先处理返回键。一个方案是复制全部代码，另一个方案是做一套通用焦点框架。</p>
 <h3>先做判断</h3>
 <p>划出第一版的复用边界。判断设备按键映射、返回优先级、网格导航、列表滚动是否应该共享。写下你愿意为共享方案承担的一个代价。</p>
 <h3>验收</h3>
-<p>写出一份五行以内的决策记录。假设乙方换了列表组件，说清受影响的范围，以及什么新证据会让你调整设计。</p><details><summary>查看参考分析</summary><p>可先共享物理按键到动作的映射，以及经过两款游戏验证的返回消费规则。网格与列表的导航保留在各自页面，避免把布局差异塞进共享接口。等第三个页面出现并证实有稳定重复模式，再讨论提取焦点策略。</p></details></details><label>学习状态 <select aria-label="软件架构学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>写出一份五行以内的决策记录。假设乙方换了列表组件，说清受影响的范围，以及什么新证据会让你调整设计。</p><details><summary>查看参考分析</summary><p>可先共享物理按键到动作的映射，以及经过两款游戏验证的返回消费规则。网格与列表的导航保留在各自页面，避免把布局差异塞进共享接口。等第三个页面出现并证实有稳定重复模式，再讨论提取焦点策略。</p></details></details><label>我的答案<textarea data-answer aria-label="软件架构答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="软件架构学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 <article data-lesson="04-agent" id="04-agent"><h3>AI Agent 工程</h3><p>Agent 给出了根因，什么证据足以让你采信？</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>输入只有三行模拟日志：第 41 行记录焦点离开菜单，第 42 行记录面板关闭，第 43 行记录焦点为空。Agent 说「可确定是监听器泄漏，已修好」，却没给改动和测试结果。</p>
 <h3>先做判断</h3>
 <p>把报告里的内容分成可观察事实、待验证假设和未证实的交付。给 Agent 写一句下一步任务，注明允许做的事和应提交的证据。</p>
 <h3>验收</h3>
-<p>给出一条能拒绝这份报告的规则，再写一条证据不足时的合格输出。更换模型时仍能用同一标准评估。</p><details><summary>查看参考分析</summary><p>三行日志能支持“面板关闭后焦点为空”。监听器泄漏要靠订阅与解绑、重复回调或生命周期日志验证。可以要求 Agent 只读检查并引用文件和日志行，列出至少一个可区分的替代假设。没有改动记录和实际测试，就无法确认修复。</p></details></details><label>学习状态 <select aria-label="AI Agent 工程学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>给出一条能拒绝这份报告的规则，再写一条证据不足时的合格输出。更换模型时仍能用同一标准评估。</p><details><summary>查看参考分析</summary><p>三行日志能支持“面板关闭后焦点为空”。监听器泄漏要靠订阅与解绑、重复回调或生命周期日志验证。可以要求 Agent 只读检查并引用文件和日志行，列出至少一个可区分的替代假设。没有改动记录和实际测试，就无法确认修复。</p></details></details><label>我的答案<textarea data-answer aria-label="AI Agent 工程答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="AI Agent 工程学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 <article data-lesson="05-performance" id="05-performance"><h3>游戏性能与图形学</h3><p>平均帧时间接近，低配盒子为什么还是卡？</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>同一台盒子、同一路径下，方案甲的帧时间中位数是 16 毫秒，P95 是 19 毫秒。方案乙的中位数是 15 毫秒，P95 是 44 毫秒。卡顿常出现在半透明弹窗出现时。</p>
 <h3>先做判断</h3>
 <p>哪组更符合卡顿反馈？你会优先做哪两个一次只改变一个变量的实验？每个实验写清什么结果会加强你的猜测。</p>
 <h3>验收</h3>
-<p>区分已经观察到的现象与还需验证的瓶颈。给出两组可重复实验，写明设备、采样路径和对比指标。</p><details><summary>查看参考分析</summary><p>乙的 P95 更高，表示慢帧尾部更重，和偶发卡顿吻合。先保持动画和对象数量固定，只改渲染分辨率。第二次保持分辨率固定，只改半透明叠加层。若慢帧随两者明显变化，像素开销值得继续验证。若相近，转查 CPU 主线程、资源加载和垃圾回收。用相同路径重复采样。</p></details></details><label>学习状态 <select aria-label="游戏性能与图形学学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>区分已经观察到的现象与还需验证的瓶颈。给出两组可重复实验，写明设备、采样路径和对比指标。</p><details><summary>查看参考分析</summary><p>乙的 P95 更高，表示慢帧尾部更重，和偶发卡顿吻合。先保持动画和对象数量固定，只改渲染分辨率。第二次保持分辨率固定，只改半透明叠加层。若慢帧随两者明显变化，像素开销值得继续验证。若相近，转查 CPU 主线程、资源加载和垃圾回收。用相同路径重复采样。</p></details></details><label>我的答案<textarea data-answer aria-label="游戏性能与图形学答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="游戏性能与图形学学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 <article data-lesson="06-selection" id="06-selection"><h3>技术选型</h3><p>两个引擎各有优势，怎么避免选了才发现跑不了？</p><details><summary>打开案例</summary><h3>案例</h3>
 <p>方案甲团队熟悉，但在两台目标盒子中的一台上尚未实测。方案乙已经在两台盒子跑通样例，团队仍需摸索构建流程。这个项目必须离线运行，且两周后要交首包。</p>
 <h3>先做判断</h3>
 <p>写三条上线硬门槛。你只有半天做验证，先拿哪个证据？说明在什么结果下会选甲、选乙或暂缓。</p>
 <h3>验收</h3>
-<p>交付一页决策记录，包含硬门槛、待验证项、半天试验计划、临时选择和改判条件。用这份记录让同事能复现你的判断。</p><details><summary>查看参考分析</summary><p>优先在尚未验证的目标盒子跑甲的最小离线包，检查安装、冷启动和遥控器。并行评估乙的可重复制包和接手成本。甲通过硬门槛后可凭团队熟悉度占优。若甲在目标盒子失败且没有两周内可行的修复路径，再确认乙是否能完成离线和重复制包。样例跑通只覆盖部分风险。</p></details></details><label>学习状态 <select aria-label="技术选型学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
+<p>交付一页决策记录，包含硬门槛、待验证项、半天试验计划、临时选择和改判条件。用这份记录让同事能复现你的判断。</p><details><summary>查看参考分析</summary><p>优先在尚未验证的目标盒子跑甲的最小离线包，检查安装、冷启动和遥控器。并行评估乙的可重复制包和接手成本。甲通过硬门槛后可凭团队熟悉度占优。若甲在目标盒子失败且没有两周内可行的修复路径，再确认乙是否能完成离线和重复制包。样例跑通只覆盖部分风险。</p></details></details><label>我的答案<textarea data-answer aria-label="技术选型答案" maxlength="4000" placeholder="写下判断、理由和验证办法"></textarea></label><button type="button" data-review>复制批阅请求</button> <span data-feedback role="status"></span><label>学习状态 <select aria-label="技术选型学习状态"><option value="todo">未开始</option><option value="doing">学习中</option><option value="done">已通过验收</option></select></label></article>
 </div></section>
 <section id="review" class="panel"><h2>每周复盘</h2><p>选一个本周的关键实验，给该主题评分，记录一条证据和一个下周动作。同一日期可再次保存以修正记录。</p>
 <form id="review-form"><div class="review-fields">
@@ -118,7 +118,10 @@ function validate(data) {
   const clean = blank();
   for (const [id, row] of Object.entries(data.lessons)) {
     if (!/^\d{2}-[a-z-]+$/.test(id) || !isRecord(row) || !statuses.includes(row.status) || !timestamp(row.at)) throw new Error();
+    if (row.answer !== undefined && (typeof row.answer !== 'string' ||
+      row.answer.length > 4000 || !timestamp(row.answerAt))) throw new Error();
     clean.lessons[id] = {status: row.status, at: row.at};
+    if (row.answer !== undefined) Object.assign(clean.lessons[id], {answer: row.answer, answerAt: row.answerAt});
   }
   for (const [date, row] of Object.entries(data.reviews)) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) ||
@@ -138,10 +141,14 @@ function read() {
 function merge(base, incoming) {
   for (const section of ['lessons', 'reviews']) {
     for (const [id, row] of Object.entries(incoming[section])) {
+      const previous = base[section][id];
+      const draft = [previous, row].filter(item => item?.answerAt)
+        .sort((left, right) => left.answerAt.localeCompare(right.answerAt) || left.answer.localeCompare(right.answer)).pop();
       if (!base[section][id] || row.at > base[section][id].at ||
         (row.at === base[section][id].at && JSON.stringify(row) > JSON.stringify(base[section][id]))) {
-        base[section][id] = row;
+        base[section][id] = {...row};
       }
+      if (draft) Object.assign(base[section][id], {answer: draft.answer, answerAt: draft.answerAt});
     }
   }
   return base;
@@ -155,6 +162,9 @@ function render() {
   for (const card of cards) {
     const status = state.lessons[card.dataset.lesson]?.status ?? 'todo';
     card.querySelector('select').value = status;
+    const answer = card.querySelector('[data-answer]');
+    const draft = state.lessons[card.dataset.lesson]?.answer ?? '';
+    if (answer && answer.value !== draft) answer.value = draft;
     if (status === 'done') completed++;
   }
   document.getElementById('count').textContent = completed + ' / ' + cards.length + ' 节通过验收';
@@ -203,6 +213,40 @@ window.addEventListener('storage', event => {
 });
 for (const card of cards) {
   const select = card.querySelector('select');
+  const answer = card.querySelector('[data-answer]');
+  const feedback = card.querySelector('[data-feedback]');
+  const id = card.dataset.lesson;
+  if (answer) {
+    answer.oninput = () => {
+      const row = state.lessons[id] ?? {status: 'todo', at: new Date().toISOString()};
+      save({lessons: {[id]: {...row, answer: answer.value, answerAt: new Date().toISOString()}}, reviews: {}}, '答案已保存。');
+      feedback.textContent = notice.textContent;
+    };
+    card.querySelector('[data-review]').onclick = async () => {
+      if (!answer.value.trim()) {
+        feedback.textContent = '请先写下你的答案。';
+        answer.focus();
+        return;
+      }
+      const sections = [...card.querySelector('details').children].filter(element => ['H3', 'P'].includes(element.tagName));
+      const request = ['请批阅这道游戏工程判断题。按验收要求指出一项做得好的地方、一项证据缺口，并给出一个追问。',
+        card.querySelector('h3').textContent, location.href.split('#')[0] + '#' + id,
+        ...sections.map(element => element.textContent), '我的答案', answer.value.trim()].join('\n\n');
+      try {
+        await navigator.clipboard.writeText(request);
+        feedback.textContent = '已复制。粘贴到 AI 对话并发送即可。';
+      } catch {
+        const blob = new Blob([request], {type: 'text/plain;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = id + '-review.txt';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        feedback.textContent = '已下载批阅请求，可将文件发到 AI 对话。';
+      }
+    };
+  }
   select.onchange = () => save({
     lessons: {[card.dataset.lesson]: {status: select.value, at: new Date().toISOString()}}, reviews: {}
   }, '课程进度已保存。');
